@@ -116,7 +116,6 @@ void drawOption(int x, Color color)
 	// Draw the big box
 	drawColor(color);
 	Utilities::drawRect(x-3, 37, 46, 46);
-
 	// Draw the smaller grey box
 	drawColor(GREY);
 	Utilities::drawRect(x-2, 38, 44, 44);
@@ -126,66 +125,36 @@ void drawOption(int x, Color color)
 	Utilities::drawRect(x, 40, 40, 40);
 }
 
-void checkRow()
+bool isAdjacent(int x1, int y1, int x2, int y2)
 {
-	for (int i = 0; i < 17; i++)
-	{
-		for (int j = 0; j < 17; j++)
-		{
-			if (!doIChange[j][i])
-			{
-				if (board[j][i] == selectedColor)
-				{
-					doIChange[j][i] = true;
-				}
-				else
-					return;
-			}
-		}
-	}
-}
-
-void checkColumn()
-{
-	for (int i = 0; i < 17; i++)
-	{
-		for (int j = 0; j < 17; j++)
-		{
-			if (!doIChange[i][j])
-			{
-				if (board[i][j] == selectedColor)
-				{
-					doIChange[i][j] = true;
-				}
-				else
-					return;
-			}
-		}
-	}
+  if ((std::abs(x1 - x2) == 1 && std::abs(y1 - y2) == 0) || (std::abs(x1 - x2) == 0 && std::abs(y1 - y2) == 1))
+    return true;
+  return false;
 }
 
 void playOption()
 {
 	Color currentColor = board[0][0];
-	for (int i = 0; i < 17; i++)
-	{
-		for (int j = 0; j < 17; j++)
-		{
-			checkColumn();
-			checkRow();
-		}
-	}
-	
-	for (int i = 0; i < 17; i++)
-	{
-		for (int j = 0; j < 17; j++)
-		{
-			if (doIChange[i][j] == true)
-			{
-				board[i][j] = selectedColor;
-			}
-		}
-	}
+  for (int i = 0; i < 17; i++)
+  {
+    for (int j = 0; j < 17; j++)
+    {
+      if (doIChange[i][j])
+      {
+        board[i][j] = selectedColor;
+        for (int k = 0; k < 17; k++)
+        {
+          for (int l = 0; l < 17; l++)
+          {
+            if (!doIChange[k][l] && isAdjacent(i, j, k, l) && board[k][l] == selectedColor)
+            {
+              doIChange[k][l] = true;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 void handleKeyboard(unsigned char key, int xmouse, int ymouse)

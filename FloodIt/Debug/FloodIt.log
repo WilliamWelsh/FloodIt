@@ -1,3 +1,8 @@
 ﻿  main.cpp
-c:\programming projects\floodit\floodit\main.cpp(49): error C4996: 'kbhit': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _kbhit. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\conio.h(459): note: see declaration of 'kbhit'
+c:\users\krystian\downloads\floodit\floodit\main.cpp(26): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\krystian\downloads\floodit\floodit\main.cpp(98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\krystian\downloads\floodit\floodit\main.cpp(118): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\krystian\downloads\floodit\floodit\main.cpp(121): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\krystian\downloads\floodit\floodit\main.cpp(125): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\krystian\downloads\floodit\floodit\main.cpp(212): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  FloodIt.vcxproj -> C:\Users\Krystian\Downloads\FloodIt\Debug\FloodIt.exe
