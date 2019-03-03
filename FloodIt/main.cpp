@@ -5,7 +5,7 @@
 #include <math.h>
 #include "Utilities.h"
 #include <ctime>
-//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") // Get rid of console
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") // Get rid of console
 
 int screenSize = 500; // Square Screen (width and height)
 void Draw();
@@ -14,15 +14,57 @@ void drawEverySquare();
 void drawColor(Color color);
 void drawOption(int x, Color color);
 void handleKeyboard(unsigned char key, int xmouse, int ymouse);
-void checkColumn();
-void checkRow();
+void playOption();
 
 Color board[17][17];
 bool doIChange[17][17];
 Color selectedColor;
 
+void handleMouse(int button, int state, int x, int y)
+{
+	y = glutGet(GLUT_WINDOW_HEIGHT) - y;
+
+	unsigned char pixel[4];
+	glReadPixels(x, y, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, pixel);
+	int R = (int)pixel[0];
+	int G = (int)pixel[1];
+	int B = (int)pixel[2];
+
+	if (R == 255 && G == 0 && B == 0)
+	{
+		selectedColor = RED;
+		playOption();
+	}
+	else if (R == 0 && G == 255 && B == 0)
+	{
+		selectedColor = GREEN;
+		playOption();
+	}
+	else if (R == 0 && G == 0 && B == 255)
+	{
+		selectedColor = BLUE;
+		playOption();
+	}
+	else if (R == 255 && G == 255 && B == 0)
+	{
+		selectedColor = YELLOW;
+		playOption();
+	}
+	else if (R == 255 && G == 127 && B == 0)
+	{
+		selectedColor = ORANGE;
+		playOption();
+	}
+	else if (R == 255 && G == 110 && B == 199)
+	{
+		selectedColor = PINK;
+		playOption();
+	}
+}
+
 int main(int argc, char** argv)
 {
+	// Seed random
 	srand(time(0));
 
 	// Initialize
@@ -30,9 +72,10 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - screenSize) / 2, (glutGet(GLUT_SCREEN_HEIGHT) - screenSize) / 2); // Center the screen
 	glutInitWindowSize(screenSize, screenSize);
-	glutCreateWindow("Flood It");
+	glutCreateWindow("Flood-It!");
 
 	// Set up callback functions
+	glutMouseFunc(handleMouse);
 	glutDisplayFunc(Draw);
 	glutKeyboardFunc(handleKeyboard);
 	glutTimerFunc(1000 / 60, Update, 0);
@@ -82,11 +125,6 @@ void Update(int value)
 
 void drawEverySquare()
 {
-	//std::string s;
-	//s = std::to_string(testArray[0][1]);
-	//glRasterPos2f(100, 10);
-	//glutBitmapString(GLUT_BITMAP_HELVETICA_18, (const unsigned char*)s.c_str());
-	
 	int posX = 80;
 	int posY = 425;
 	for (int row = 0; row < 17; row++)
@@ -125,38 +163,36 @@ void drawOption(int x, Color color)
 	Utilities::drawRect(x, 40, 40, 40);
 }
 
-bool isAdjacent(int x1, int y1, int x2, int y2)
-{
-  if ((std::abs(x1 - x2) == 1 && std::abs(y1 - y2) == 0) || (std::abs(x1 - x2) == 0 && std::abs(y1 - y2) == 1))
-    return true;
-  return false;
-}
-
 void playOption()
 {
 	Color currentColor = board[0][0];
-  for (int i = 0; i < 17; i++)
-  {
-    for (int j = 0; j < 17; j++)
-    {
-      if (doIChange[i][j])
-      {
-        board[i][j] = selectedColor;
-        for (int k = 0; k < 17; k++)
-        {
-          for (int l = 0; l < 17; l++)
-          {
-            if (!doIChange[k][l] && isAdjacent(i, j, k, l) && board[k][l] == selectedColor)
-            {
-              doIChange[k][l] = true;
-            }
-          }
-        }
-      }
-    }
-  }
+	// Loop through the whole board
+	for (int i = 0; i < 17; i++)
+	{
+		for (int j = 0; j < 17; j++)
+		{
+			// If this is true, then set that slot to the selected color
+			if (doIChange[i][j])
+			{
+				board[i][j] = selectedColor;
+				// Then check all the slots beside it, if they're the same color, then set that slot to true
+				for (int k = 0; k < 17; k++)
+				{
+					for (int l = 0; l < 17; l++)
+					{
+						if (!doIChange[k][l] && Utilities::isAdjacent(i, j, k, l) && board[k][l] == selectedColor)
+						{
+							doIChange[k][l] = true;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
+// Options 1-6 for colors
+// Mostly just to test things faster
 void handleKeyboard(unsigned char key, int xmouse, int ymouse)
 {
 	switch (key)
@@ -189,6 +225,7 @@ void handleKeyboard(unsigned char key, int xmouse, int ymouse)
 	playOption();
 }
 
+// Draw colors
 void drawColor(Color color)
 {
 	switch (color)

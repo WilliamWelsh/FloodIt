@@ -1,8 +1,8 @@
 ﻿  main.cpp
-c:\users\krystian\downloads\floodit\floodit\main.cpp(26): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\krystian\downloads\floodit\floodit\main.cpp(98): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\krystian\downloads\floodit\floodit\main.cpp(118): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\krystian\downloads\floodit\floodit\main.cpp(121): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\krystian\downloads\floodit\floodit\main.cpp(125): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\krystian\downloads\floodit\floodit\main.cpp(212): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-  FloodIt.vcxproj -> C:\Users\Krystian\Downloads\FloodIt\Debug\FloodIt.exe
+c:\users\willi\documents\repos\floodit\floodit\main.cpp(68): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\willi\documents\repos\floodit\floodit\main.cpp(136): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\willi\documents\repos\floodit\floodit\main.cpp(156): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\willi\documents\repos\floodit\floodit\main.cpp(159): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\willi\documents\repos\floodit\floodit\main.cpp(163): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\willi\documents\repos\floodit\floodit\main.cpp(249): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  FloodIt.vcxproj -> C:\Users\willi\Documents\repos\FloodIt\Debug\FloodIt.exe

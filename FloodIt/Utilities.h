@@ -24,4 +24,7 @@ class Utilities
 public:
 	// Draw rectangles
 	static void drawRect(float x, float y, float width, float height);
+
+	// Check if two items are adjacent
+	static bool isAdjacent(int x1, int y1, int x2, int y2);
 };
