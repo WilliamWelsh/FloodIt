@@ -50,7 +50,7 @@ void handleMouse(int button, int state, int x, int y)
 		selectedColor = YELLOW;
 		playOption();
 	}
-	else if (R == 255 && G == 127 && B == 0)
+	else if (R == 255 && (G == 127 || G == 128) && B == 0)
 	{
 		selectedColor = ORANGE;
 		playOption();

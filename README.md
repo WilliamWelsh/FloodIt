@@ -17,7 +17,10 @@ You can download a compiled build [here](https://github.com/WilliamWelsh/FloodIt
 
 ## Acknowledgements
 
-Thank you to [Krystian](https://github.com/18), this game wouldn't have worked properly without him.
+Thank you to [Krystian](https://github.com/18), this game wouldn't have worked properly without him.  
+
+Thank you to [Iain](https://github.com/Arrowerse2001), for helping me with testing and debugging.
+
 
 ## License
 
